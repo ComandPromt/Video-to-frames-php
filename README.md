@@ -1,7 +1,7 @@
 # Install
 
 ## Windows
--[Download](https://www.ffmpeg.org/download.html#build-windows)
+[Download](https://www.ffmpeg.org/download.html#build-windows)
 - Move "ffmpeg.exe" and "ffprobe.exe" to "C:\Windows\System32" and to "C:\Windows\SysWOW64"
 
 ## Linux
@@ -12,7 +12,7 @@ sudo apt install ffmpeg
 ~~~
 
 ## Mac
-[Mac]https://www.ffmpeg.org/download.html#build-mac
+[Mac](https://www.ffmpeg.org/download.html#build-mac)
 
 # Use
 
