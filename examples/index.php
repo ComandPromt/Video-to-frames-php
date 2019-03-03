@@ -10,7 +10,7 @@ if (!file_exists("tmp")) {
 if (!file_exists("video")) {
     mkdir("video", 777, true);
 }
-include("../../funciones.php");
+include("funciones.php");
 if(count(check_images("output","jpg"))>=1){
 	print '<h1 name="salida">Ya has convertido un video a frames!</h1>';
 }
