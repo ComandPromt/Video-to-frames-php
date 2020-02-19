@@ -14,17 +14,21 @@ include("funciones.php");
 if(count(check_images("output","jpg"))>=1){
 	print '<h1 name="salida">Ya has convertido un video a frames!</h1>';
 }
+
 else{
+	
 	$numimmp4=check_images("video/","mp4");
 	$numiflv=check_images("video/","flv");
 	$numim3u8=check_images("video/","m3u8");
 	$numimkv=check_images("video/","mkv");
-	$numimts=check_images("video/","ts");
+	$numimts=check_images("video/",".ts");
 	$numiavi=check_images("video/","avi");
 	$numi3gp=check_images("video/","3gp");
 	$numimov=check_images("video/","mov");
 	$numiwmv=check_images("video/","wmv");
+	
 	$videos=array();
+	
 	if(count($numimmp4)==1){
 		$videos[0]=$numimmp4[0];
 	
@@ -67,12 +71,16 @@ else{
 	}
 	
 	else{
+		
 		date_default_timezone_set('Europe/Madrid');
+		
 		include_once 'includes/bootstrap.php';
+		
 			$video = new Video('video/'.$videos[0]);
 			$process = $video->extractFrames(new Timecode(1), new Timecode(1))
 				->save('output/'.substr($videos[0],0,-4).'_frame_%timecode.jpg', null, Media::OVERWRITE_EXISTING);
 			$frames = $process->getOutput();
+			
 			$frame_paths = array();
 			
 			if(empty($frames) === false){
@@ -81,18 +89,24 @@ else{
 					array_push($frame_paths, $frame->getMediaPath());
 				}
 			}
-	print '<h1 name="salida">Exito!</h1>';
-	unlink('video/'.$videos[0]);
-	if($_SESSION['video2gif']){
-		$frames=array();
-		$frames=check_images("output/","jpg");
-		for($x=0;$x<count($frames);$x++){
-			rename("output/".$frames[$x],"../../Hacer_gif/img/".$frames[$x]);
+			
+		print '<h1 name="salida">Exito!</h1>';
+	
+		unlink('video/'.$videos[0]);
+	
+		if($_SESSION['video2gif']){
+		
+			$frames=array();
+			$frames=check_images("output/","jpg");
+		
+			for($x=0;$x<count($frames);$x++){
+				rename("output/".$frames[$x],"../../Hacer_gif/img/".$frames[$x]);
+			}
+	
+			header("Location: ../../Hacer_gif/crear_gif.php");
+	
 		}
-	
-		header("Location: ../../Hacer_gif/index.php");
-	
-	}
 	}
 }
+
 ?>
